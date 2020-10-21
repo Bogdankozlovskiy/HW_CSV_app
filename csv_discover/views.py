@@ -35,7 +35,7 @@ class AggregateTable(View):
         value_field = request.GET['value_field']
         full_name = f"./media/{request.GET['full_name']}"
         df = pd.read_csv(full_name, sep=';', index_col=0)
-        result = df.groupby([row_field, column_field]).agg({value_field: 'sum'}).to_html()
+        result = df.groupby([row_field, column_field]).agg({value_field: 'sum'}).unstack(level=-1).to_html()
         result = mark_safe(result)
         return render(request, 'aggregate_table.html', {'result': result})
 # Create your views here.
