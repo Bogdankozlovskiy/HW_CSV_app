@@ -3,15 +3,38 @@
 {% block title %}index page{% endblock %}
 
 {% block index %}
-<h1>File Upload</h1>
-{% if file_name %}
-<h1>Current File {{ file_name }}</h1>
-{% endif %}
 <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
+    <h1>File Upload</h1>
+    {% if file_name %}
+    <h1>Current File {{ file_name }}</h1>
+    {% endif %}
     {% csrf_token %}
     <input type="submit">
     {{ form.file }}
 </form>
 <hr>
 {{ df }}
+<br>
+<form action="{% url 'aggregate_table' %}" method="get">
+    <h1>Pivot Table</h1>
+    <span>Row Field</span>
+    <select name="row_field">
+        {% for row in row_field %}
+            <option>{{ row }}</option>
+        {% endfor %}
+    </select>
+    <span>Column Filed</span>
+    <select name="column_field">
+        {% for col in column_field %}
+            <option>{{ col }}</option>
+        {% endfor %}
+    </select>
+    <span>Value Field</span>
+    <select name="value_field">
+        {% for val in value_field %}
+            <option>{{ val }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit">
+</form>
 {% endblock %}
