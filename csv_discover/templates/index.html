@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'main_template.html' %}
+
+{% block title %}index page{% endblock %}
+
+{% block index %}
 <h1>File Upload</h1>
+{% if file_name %}
+<h1>Current File {{ file_name }}</h1>
+{% endif %}
 <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="submit">
     {{ form.file }}
 </form>
-</body>
-</html>
+<hr>
+{{ df }}
+{% endblock %}
