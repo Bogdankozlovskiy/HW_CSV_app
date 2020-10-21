@@ -15,8 +15,10 @@
 <hr>
 {{ df }}
 <br>
+{% if df %}
 <form action="{% url 'aggregate_table' %}" method="get">
     <h1>Pivot Table</h1>
+    <input type="text" value="{{ full_name }}" name="full_name" hidden>
     <span>Row Field</span>
     <select name="row_field">
         {% for row in row_field %}
@@ -37,4 +39,5 @@
     </select><br>
     <input type="submit">
 </form>
+{% endif %}
 {% endblock %}
